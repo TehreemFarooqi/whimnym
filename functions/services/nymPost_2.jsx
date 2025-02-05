@@ -64,25 +64,57 @@ class NymPosttwo extends Builder {
       left,
     } = this.styles;
 
-    const nymFontSizeNum = parseFloat(nymFontSize);
-    const nymLineHeightNum = parseFloat(nymLineHeight);
-    const lineHeightRatio = nymLineHeightNum / nymFontSizeNum;
+    if (!Nym) throw new Error("Nym text cannot be empty.");
 
     const canvas = createCanvas(1, 1);
     const context = canvas.getContext("2d");
 
-    context.font = `${nymFontSize} BubbleGum`;
-    const measuredTextHeight = nymFontSizeNum;
+    let currentFontSize = parseFloat(nymFontSize);
 
-    const fitsWithinHeight = measuredTextHeight < nymHeight;
+    const getTextDimensions = (text, maxWidth) => {
+      context.font = `${currentFontSize}px Arial`;
+      const words = text.split(" ");
+      let line = "";
+      let lines = [];
+      let maxLineWidth = 0;
 
-    const finalNymFontSize = fitsWithinHeight
-      ? nymFontSize
-      : `${nymHeight * 0.9}px`;
+      words.forEach((word) => {
+        const testLine = `${line}${word} `;
+        const testWidth = context.measureText(testLine).width;
 
-    const finalNymLineHeight = fitsWithinHeight
-      ? nymLineHeight
-      : `${parseFloat(finalNymFontSize) * lineHeightRatio}px`;
+        if (testWidth > maxWidth && line) {
+          lines.push(line);
+          line = `${word} `;
+        } else {
+          line = testLine;
+        }
+        maxLineWidth = Math.max(maxLineWidth, testWidth);
+      });
+
+      if (line) lines.push(line);
+
+      const textHeight = lines.length * (currentFontSize * 1.2); // Line height = font size * 1.2
+      return { textHeight, textWidth: maxLineWidth, lineCount: lines.length };
+    };
+
+    let { textHeight, textWidth } = getTextDimensions(Nym, width);
+
+    console.log("Initial Text Dimensions:", { textHeight, textWidth });
+
+    while (textHeight > height && currentFontSize > 1) {
+      console.log("Reducing font size:", currentFontSize, "Text Dimensions:", {
+        textHeight,
+        textWidth,
+      });
+      currentFontSize -= 1;
+      ({ textHeight, textWidth } = getTextDimensions(Nym, width));
+    }
+
+    console.log("Final Font Size:", currentFontSize);
+
+    const finalNymFontSize = `${currentFontSize}px`;
+    const lineHeightRatio = parseFloat(nymLineHeight) / parseFloat(nymFontSize);
+    const finalNymLineHeight = `${currentFontSize * lineHeightRatio}px`;
 
     const formattedNym = formatNym ? Nym.toUpperCase() : Nym;
 

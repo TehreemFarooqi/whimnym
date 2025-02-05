@@ -51,6 +51,29 @@ class NymPostfive extends Builder {
     return this;
   }
 
+  getAdjustedFontSizeForHeight(text, baseFontSize, heightLimit, context) {
+    context.font = `${baseFontSize} Arial`;
+
+    const getTextHeight = () => {
+      const metrics = context.measureText(text);
+      return metrics.fontBoundingBoxAscent + metrics.fontBoundingBoxDescent;
+    };
+
+    let currentFontSize = parseFloat(baseFontSize);
+    let measuredTextHeight = getTextHeight();
+
+    while (measuredTextHeight > heightLimit) {
+      currentFontSize -= 6;
+      context.font = `${currentFontSize}px Arial`;
+      measuredTextHeight = getTextHeight();
+    }
+
+    return {
+      fontSize: `${currentFontSize}px`,
+      lineHeight: `${currentFontSize}px`,
+    };
+  }
+
   async render() {
     const { Nym, NymColor } = this.options.getOptions();
     const {
@@ -65,44 +88,22 @@ class NymPostfive extends Builder {
       nymHeight,
     } = this.styles;
 
-    const fixedTextWidth = 960;
-    const innerBorderHeight = height - 120;
-
-    const nymFontSizeNum = parseFloat(nymFontSize);
-    const nymLineHeightNum = parseFloat(nymLineHeight);
-
-    const lineHeightRatio = nymLineHeightNum / nymFontSizeNum;
-    const calculatedNymFontSize = `${
-      Math.min(fixedTextWidth, innerBorderHeight) * 0.15
-    }px`;
-    const calculatedNymLineHeight = `${
-      parseFloat(calculatedNymFontSize) * lineHeightRatio
-    }px`;
-
     const canvas = createCanvas(1, 1);
     const context = canvas.getContext("2d");
 
-    context.font = `${nymFontSize} BubbleGum`;
-    const measuredTextWidth = context.measureText(Nym.toUpperCase()).width;
-
-    context.font = calculatedNymFontSize;
-    const measuredTextHeight =
-      parseFloat(calculatedNymFontSize) * lineHeightRatio;
-
-    const isNymTextFitting =
-      measuredTextWidth < fixedTextWidth &&
-      measuredTextHeight < innerBorderHeight;
-
-    const finalNymFontSize = isNymTextFitting
-      ? nymFontSize
-      : calculatedNymFontSize;
-    const finalNymLineHeight = isNymTextFitting
-      ? nymLineHeight
-      : calculatedNymLineHeight;
+    // Adjust font size and line height for height
+    const { fontSize: adjustedNymFontSize, lineHeight: adjustedNymLineHeight } =
+      this.getAdjustedFontSizeForHeight(
+        Nym.toUpperCase(),
+        nymFontSize,
+        nymHeight,
+        context
+      );
 
     const formattedNym = formatNym ? Nym.toUpperCase() : Nym;
 
-    const verticalCenterOffset = (nymHeight - measuredTextHeight) / 2;
+    const verticalCenterOffset =
+      (nymHeight - parseFloat(adjustedNymFontSize)) / 2;
 
     return JSX.createElement(
       "div",
@@ -123,10 +124,10 @@ class NymPostfive extends Builder {
         "h1",
         {
           style: {
-            fontSize: finalNymFontSize,
+            fontSize: adjustedNymFontSize,
             fontFamily: "BubbleGum",
             color: NymColor,
-            lineHeight: finalNymLineHeight,
+            lineHeight: adjustedNymLineHeight,
             whiteSpace: "pre-wrap",
             width: `${nymWidth}px`,
             height: `${nymHeight}px`,

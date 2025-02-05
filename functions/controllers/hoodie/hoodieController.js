@@ -56,12 +56,12 @@ const createHoodie = async (
         NymColor: "#FFFFFF",
         formatNym: false,
         nymTop: 265,
-        definitionTop: 904,
+        definitionTop: 823,
         left: 135,
         nymWidth: 3263,
         nymHeight: 558,
         definitionWidth: 3263,
-        definitionHeight: 241,
+        definitionHeight: 220, //241
         distanceBetweenTexts: 20,
       });
 
@@ -77,12 +77,12 @@ const createHoodie = async (
         NymColor: "#000000",
         formatNym: false,
         nymTop: 265,
-        definitionTop: 904,
+        definitionTop: 823,
         left: 135,
         nymWidth: 3263,
         nymHeight: 558,
         definitionWidth: 3263,
-        definitionHeight: 241,
+        definitionHeight: 220,
         distanceBetweenTexts: 20,
       });
     }

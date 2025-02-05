@@ -88,39 +88,25 @@ class NymPostnine extends Builder {
     const canvas = createCanvas(1, 1);
     const context = canvas.getContext("2d");
 
-    const getAdjustedFontSize = (
-      text,
-      baseFontSize,
-      widthLimit,
-      heightLimit
-    ) => {
+    const getAdjustedFontSize = (text, baseFontSize, widthLimit) => {
       context.font = `${baseFontSize} Arial`;
-      console.log("font: ", context.font);
       let measuredTextWidth = context.measureText(text).width;
-      console.log(measuredTextWidth);
+
       let currentFontSize = parseFloat(baseFontSize);
-      console.log(currentFontSize);
-      while (
-        (measuredTextWidth > widthLimit || currentFontSize > heightLimit) &&
-        currentFontSize > 0
-      ) {
+      while (measuredTextWidth > widthLimit) {
         currentFontSize -= 1;
         context.font = `${currentFontSize}px Arial`;
         measuredTextWidth = context.measureText(text).width;
       }
-      console.log(currentFontSize);
       return `${currentFontSize}px`;
     };
 
     const adjustedNymFontSize = getAdjustedFontSize(
       Nym.toUpperCase(),
       nymFontSize,
-      nymWidth,
-      nymHeight
+      nymWidth
     );
 
-    console.log("adjusted size:", adjustedNymFontSize);
-    console.log(nymFontSize);
     const adjustedNymHeight = Math.ceil(parseFloat(adjustedNymFontSize) * 1.15);
 
     const adjustedDefinitionTop =
@@ -129,8 +115,7 @@ class NymPostnine extends Builder {
     const adjustedDefinitionFontSize = getAdjustedFontSize(
       Definition,
       definitionFontSize,
-      definitionWidth,
-      definitionHeight
+      definitionWidth
     );
 
     const adjustedNymLineHeight = `${parseFloat(adjustedNymFontSize) * 1.15}px`;
@@ -138,57 +123,14 @@ class NymPostnine extends Builder {
       parseFloat(adjustedDefinitionFontSize) * 1.15
     }px`;
 
-    const originalDefinitionHeight = parseFloat(definitionLineHeight);
-    const originalNymHeight = parseFloat(nymLineHeight);
-
-    console.log("Parsed Original Definition Height:", originalDefinitionHeight);
-    console.log("Parsed Original Nym Height:", originalNymHeight);
-
-    console.log("Adjusted Nym Font Size:", adjustedNymFontSize);
-    const adjustedNymFontSizeValue = parseFloat(adjustedNymFontSize);
-
-    console.log(
-      "Parsed Adjusted Nym Font Size Value:",
-      adjustedNymFontSizeValue
-    );
-
-    let newDefinitionLineHeight = 0;
-    let newNymLineHeight = 0;
-
-    if (
-      isNaN(originalDefinitionHeight) ||
-      isNaN(originalNymHeight) ||
-      isNaN(adjustedNymFontSizeValue)
-    ) {
-      console.error("One or more input values are not valid numbers.");
-    } else {
-      const originalSize = parseFloat(nymFontSize);
-      const sizeRatio = adjustedNymFontSizeValue / originalSize;
-
-      console.log("Size Ratio:", sizeRatio);
-
-      const lineHeightDifference = originalNymHeight - originalDefinitionHeight;
-
-      console.log("Line Height Difference:", lineHeightDifference);
-
-      // Use the size ratio to adjust the line heights
-      const mul = lineHeightDifference * sizeRatio;
-      newDefinitionLineHeight = mul * 2.5; // This scaling factor can be adjusted based on the desired effect
-      newNymLineHeight = newDefinitionLineHeight;
-
-      console.log("New Definition Line Height:", newDefinitionLineHeight);
-      console.log("New Nym Line Height:", newNymLineHeight);
-    }
-
-    const margin = -20;
     const wordCount = Definition.length;
 
-    // Adjust definition height based on the word count
-    const additionalMargin = Math.ceil((wordCount - 25) / 25) * 270;
-    const finalDefinitionMargin =
-      wordCount > 25 ? margin + additionalMargin : margin;
+    // Adjust definition height based on the word count 62
+    const additionalHeight = Math.ceil((wordCount - 27) / 27) * 300;
+    const finalDefinitionHeight =
+      wordCount > 27 ? definitionHeight + additionalHeight : definitionHeight;
 
-    console.log("Definition margin: ", finalDefinitionMargin);
+    console.log("Definition height: ", finalDefinitionHeight);
 
     const formattedNym = formatNym ? Nym.toUpperCase() : Nym;
 
@@ -214,7 +156,7 @@ class NymPostnine extends Builder {
             fontSize: adjustedNymFontSize,
             fontFamily: "BubbleGum",
             color: NymColor,
-            lineHeight: newNymLineHeight,
+            lineHeight: adjustedNymLineHeight,
             width: `${nymWidth}px`,
             height: `${nymHeight}px`,
             margin: 0,
@@ -237,6 +179,7 @@ class NymPostnine extends Builder {
             fontFamily: "Raleway",
             color: NymColor,
             lineHeight: definitionLineHeight,
+            height: `${finalDefinitionHeight}px`, // Ensure height is dynamic if needed
             textAlign: "center",
             whiteSpace: "pre-wrap",
             width: `${definitionWidth}px`,
@@ -244,7 +187,8 @@ class NymPostnine extends Builder {
             justifyContent: "center",
             alignItems: "center",
             flexDirection: "column",
-            marginTop: `${finalDefinitionMargin}px`, //-20px
+            position: "absolute", // Apply position absolute so it can follow the nym
+            top: `${adjustedDefinitionTop}px`, // Use adjusted position for definition text
           },
         },
         Definition

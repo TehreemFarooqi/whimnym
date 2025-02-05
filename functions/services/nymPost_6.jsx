@@ -36,6 +36,7 @@ class NymPostsix extends Builder {
     nymHeight = 182,
     definitionHeight = 60,
     distanceBetweenTexts = 20,
+    leftPadding = 90,
   } = {}) {
     super(width, height);
     this.bootstrap({
@@ -61,6 +62,7 @@ class NymPostsix extends Builder {
       definitionWidth,
       definitionHeight,
       distanceBetweenTexts,
+      leftPadding,
     };
   }
 
@@ -81,6 +83,7 @@ class NymPostsix extends Builder {
       definitionHeight,
       distanceBetweenTexts,
       nymHeight,
+      leftPadding,
     } = this.styles;
 
     const canvas = createCanvas(1, 1);
@@ -123,8 +126,8 @@ class NymPostsix extends Builder {
 
     const wordCount = Definition.length;
 
-    // Adjust definition height based on the word count
-    const additionalHeight = Math.ceil((wordCount - 23) / 23) * 62;
+    // Adjust definition height based on the word count 62
+    const additionalHeight = Math.ceil((wordCount - 23) / 23) * 54;
     const finalDefinitionHeight =
       wordCount > 23 ? definitionHeight + additionalHeight : definitionHeight;
 
@@ -160,7 +163,7 @@ class NymPostsix extends Builder {
             margin: 0,
             position: "absolute",
             top: `${top}px`,
-            left: `${left}px`,
+            left: left ? `${left}px` : "0px",
             textTransform: "uppercase",
             alignItems: "center",
             justifyContent: "center",
@@ -181,7 +184,7 @@ class NymPostsix extends Builder {
             margin: 0,
             position: "absolute",
             top: `${adjustedDefinitionTop}px`,
-            left: `70 px`,
+            left: leftPadding ? `${leftPadding}px` : "90px", // Set dynamic padding or default to 90px
             whiteSpace: "pre-wrap",
             alignItems: "center",
             justifyContent: "center",

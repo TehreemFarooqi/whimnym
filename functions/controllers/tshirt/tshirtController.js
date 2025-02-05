@@ -92,7 +92,7 @@ const createTShirt = async (
         width: 3852,
         height: 4398,
         nymFontSize: "460px",
-        nymLineHeight: "534.98px",
+        nymLineHeight: "534.98px", //534.98
         Nym: name,
         NymColor: "#FFFFFF",
         formatNym: false,
@@ -122,8 +122,8 @@ const createTShirt = async (
       whiteCard = new NymPost({
         width: 3852,
         height: 4398,
-        nymFontSize: "570px",
-        nymLineHeight: "662.91px",
+        nymFontSize: "530px",
+        nymLineHeight: "600px",
         Nym: name,
         NymColor: "#FFFFFF",
         formatNym: false,
@@ -136,8 +136,8 @@ const createTShirt = async (
       blackCard = new NymPost({
         width: 3852,
         height: 4398,
-        nymFontSize: "570px",
-        nymLineHeight: "662.91px",
+        nymFontSize: "530px",
+        nymLineHeight: "600px",
         Nym: name,
         NymColor: "#000000",
         formatNym: false,

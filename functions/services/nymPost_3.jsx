@@ -108,36 +108,53 @@ class NymPostthree extends Builder {
       formatNym,
     } = this.styles;
 
-    const newWidth = innerBorderWidth - 120;
-    const newHeight = innerBorderHeight - 120;
-
-    const nymFontSizeNum = parseFloat(nymFontSize);
-    const nymLineHeightNum = parseFloat(nymLineHeight);
-
-    const lineHeightRatio = nymLineHeightNum / nymFontSizeNum;
-    const calculatedNymFontSize = `${Math.min(newWidth, newHeight) * 0.15}px`;
-    const calculatedNymLineHeight = `${
-      parseFloat(calculatedNymFontSize) * lineHeightRatio
-    }px`;
-
     const canvas = createCanvas(1, 1);
     const context = canvas.getContext("2d");
 
-    context.font = `${nymFontSize} BubbleGum`;
-    const measuredTextWidth = context.measureText(Nym.toUpperCase()).width;
+    // Parse font size and line height
+    let currentFontSize = parseFloat(nymFontSize);
+    const lineHeightRatio = parseFloat(nymLineHeight) / parseFloat(nymFontSize);
 
-    const isNymTextFitting =
-      measuredTextWidth < newWidth && parseFloat(nymFontSize) < newHeight;
+    // Function to measure text dimensions
+    const measureTextHeight = (text, maxWidth, fontSize) => {
+      context.font = `${fontSize}px Arial`;
+      const words = text.split(" ");
+      let line = "";
+      let lines = [];
 
-    const finalNymFontSize = isNymTextFitting
-      ? nymFontSize
-      : calculatedNymFontSize;
-    const finalNymLineHeight = isNymTextFitting
-      ? nymLineHeight
-      : calculatedNymLineHeight;
+      words.forEach((word) => {
+        const testLine = line + word + " ";
+        const testWidth = context.measureText(testLine).width;
 
+        if (testWidth > maxWidth && line) {
+          lines.push(line);
+          line = word + " ";
+        } else {
+          line = testLine;
+        }
+      });
+
+      if (line) lines.push(line);
+
+      const textHeight = lines.length * (fontSize * 1.2); // Approximate line height
+      return textHeight;
+    };
+
+    // Adjust font size until the text fits within the defined height
+    let textHeight = measureTextHeight(Nym, nymWidth, currentFontSize);
+    while (textHeight > nymHeight && currentFontSize > 1) {
+      currentFontSize -= 1; // Decrease font size
+      textHeight = measureTextHeight(Nym, nymWidth, currentFontSize);
+    }
+
+    // Final font size and line height
+    const finalNymFontSize = `${currentFontSize}px`;
+    const finalNymLineHeight = `${currentFontSize * lineHeightRatio}px`;
+
+    // Format the text if required
     const formattedNym = formatNym ? Nym.toUpperCase() : Nym;
 
+    // Render the JSX element
     return JSX.createElement(
       "div",
       {

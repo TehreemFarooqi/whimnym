@@ -50,7 +50,7 @@ const createCandle = async (
         innerBorderTop: 73,
         innerBorderLeft: 83,
         nymWidth: 391,
-        nymHeight: 60,
+        nymHeight: 160, //60
         nymFontSize: "70px",
         nymLineHeight: "81.41px",
         definitionWidth: 391,
@@ -77,7 +77,7 @@ const createCandle = async (
         innerBorderTop: 71,
         innerBorderLeft: 91,
         nymWidth: 513,
-        nymHeight: 60,
+        nymHeight: 160, //60
         nymFontSize: "100px",
         nymLineHeight: "116.3px",
         definitionWidth: 580,

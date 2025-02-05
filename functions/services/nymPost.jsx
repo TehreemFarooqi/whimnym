@@ -71,7 +71,7 @@ class NymPost extends Builder {
 
     const maxContainerHeight = nymHeight;
     const padding = 120;
-    const adjustedHeight = maxContainerHeight - padding;
+    const adjustedHeight = maxContainerHeight + padding;
 
     let currentFontSize = parseFloat(nymFontSize);
     const nymLineHeightNum = parseFloat(nymLineHeight);
@@ -80,40 +80,62 @@ class NymPost extends Builder {
     const canvas = createCanvas(1, 1);
     const context = canvas.getContext("2d");
 
-    const calculateWrappedTextHeight = (fontSize, text, maxWidth) => {
-      context.font = `${fontSize}px BubbleGum`;
+    // Unified function to calculate text dimensions
+    const getTextDimensions = (text, maxWidth) => {
+      context.font = `${currentFontSize}px Arial`; // Use the same font as in Code 1
       const words = text.split(" ");
       let line = "";
-      let lineCount = 0;
+      let lines = [];
+      let maxLineWidth = 0;
 
-      for (let i = 0; i < words.length; i++) {
-        const testLine = line + words[i] + " ";
+      words.forEach((word) => {
+        const testLine = `${line}${word} `;
         const testWidth = context.measureText(testLine).width;
 
-        if (testWidth > maxWidth && i > 0) {
-          line = words[i] + " ";
-          lineCount++;
+        if (testWidth > maxWidth && line) {
+          lines.push(line);
+          line = `${word} `;
         } else {
           line = testLine;
         }
-      }
-      lineCount++;
+        maxLineWidth = Math.max(maxLineWidth, testWidth);
+      });
 
-      return lineCount * fontSize * lineHeightRatio;
+      if (line) lines.push(line);
+
+      const textHeight = lines.length * (currentFontSize * lineHeightRatio); // Use lineHeightRatio for line height
+      return { textHeight, textWidth: maxLineWidth, lineCount: lines.length };
     };
 
-    while (
-      calculateWrappedTextHeight(currentFontSize, Nym, nymWidth) >
-        adjustedHeight &&
-      currentFontSize > 0
-    ) {
+    // Calculate initial text dimensions
+    let { textHeight, textWidth } = getTextDimensions(Nym, nymWidth);
+
+    console.log("Initial Text Dimensions:", { textHeight, textWidth });
+
+    // Adjust font size until the text fits within the height
+    while (textHeight > adjustedHeight && currentFontSize > 1) {
+      console.log("Reducing font size:", currentFontSize, "Text Dimensions:", {
+        textHeight,
+        textWidth,
+      });
       currentFontSize -= 1;
+      ({ textHeight, textWidth } = getTextDimensions(Nym, nymWidth));
     }
 
+    console.log("Final Font Size:", currentFontSize);
+
+    // Calculate final styles
     const finalNymFontSize = `${currentFontSize}px`;
     const finalNymLineHeight = `${currentFontSize * lineHeightRatio}px`;
 
     const formattedNym = formatNym ? Nym.toUpperCase() : Nym;
+
+    // Log the results
+    console.log({
+      finalFontSize: finalNymFontSize,
+      finalLineHeight: finalNymLineHeight,
+      formattedText: formattedNym,
+    });
 
     return JSX.createElement(
       "div",

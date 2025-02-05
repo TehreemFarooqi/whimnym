@@ -45,10 +45,12 @@ const createMug = async (name, type, definition, tags, product_description) => {
     let blueCard2;
     let navyCard2;
 
+    //width, definition width, definition height, left
+
     if (type == 1) {
       blackCard = new NymPostsix({
-        width: 2475,
-        height: 1275, //1155
+        width: 2475, //2475
+        height: 1375, //1155, 1275
         nymFontSize: "160px",
         nymLineHeight: "17px",
         definitionFontSize: "67px",
@@ -59,16 +61,16 @@ const createMug = async (name, type, definition, tags, product_description) => {
         formatNym: true,
         top: 460, //360
         definitionTop: 547,
-        left: 50, //76
+        left: 50, //76, 50
         nymWidth: 920,
-        definitionWidth: 849,
+        definitionWidth: 800, //849
         nymHeight: 182,
-        definitionHeight: 88,
+        definitionHeight: 38, //88 , 78, 68, 58
       });
 
       redCard = new NymPostsix({
         width: 2475,
-        height: 1275, //1155
+        height: 1375, //1155
         nymFontSize: "160px",
         nymLineHeight: "17px",
         definitionFontSize: "67px",
@@ -81,14 +83,14 @@ const createMug = async (name, type, definition, tags, product_description) => {
         definitionTop: 547,
         left: 50, //76
         nymWidth: 920,
-        definitionWidth: 849,
+        definitionWidth: 800,
         nymHeight: 182,
-        definitionHeight: 88,
+        definitionHeight: 38,
       });
 
       pinkCard = new NymPostsix({
         width: 2475,
-        height: 1275, //1155
+        height: 1375, //1155
         nymFontSize: "160px",
         nymLineHeight: "17px",
         definitionFontSize: "67px",
@@ -101,14 +103,14 @@ const createMug = async (name, type, definition, tags, product_description) => {
         definitionTop: 547,
         left: 50, //76
         nymWidth: 920,
-        definitionWidth: 849,
+        definitionWidth: 800,
         nymHeight: 182,
-        definitionHeight: 88,
+        definitionHeight: 38,
       });
 
       blueCard = new NymPostsix({
         width: 2475,
-        height: 1275, //1155
+        height: 1375, //1155
         nymFontSize: "160px",
         nymLineHeight: "17px",
         definitionFontSize: "67px",
@@ -121,14 +123,14 @@ const createMug = async (name, type, definition, tags, product_description) => {
         definitionTop: 547,
         left: 50, //76
         nymWidth: 920,
-        definitionWidth: 849,
+        definitionWidth: 800,
         nymHeight: 182,
-        definitionHeight: 88,
+        definitionHeight: 38,
       });
 
       navyCard = new NymPostsix({
         width: 2475,
-        height: 1275, //1155
+        height: 1375, //1155
         nymFontSize: "160px",
         nymLineHeight: "17px",
         definitionFontSize: "67px",
@@ -141,13 +143,12 @@ const createMug = async (name, type, definition, tags, product_description) => {
         definitionTop: 547,
         left: 50, //76
         nymWidth: 920,
-        definitionWidth: 849,
+        definitionWidth: 800,
         nymHeight: 182,
-        definitionHeight: 88,
+        definitionHeight: 38,
       });
 
       //15 oz
-
       blackCard2 = new NymPostsix({
         width: 2475,
         height: 1275,
@@ -161,11 +162,12 @@ const createMug = async (name, type, definition, tags, product_description) => {
         formatNym: true,
         top: 460,
         definitionTop: 547,
-        left: 50,
+        left: 0,
         nymWidth: 920,
-        definitionWidth: 849,
+        definitionWidth: 800,
         nymHeight: 182,
-        definitionHeight: 88,
+        definitionHeight: 38,
+        leftPadding: 20,
       });
 
       redCard2 = new NymPostsix({
@@ -181,11 +183,12 @@ const createMug = async (name, type, definition, tags, product_description) => {
         formatNym: true,
         top: 460,
         definitionTop: 547,
-        left: 50,
+        left: 0,
         nymWidth: 920,
-        definitionWidth: 849,
+        definitionWidth: 800,
         nymHeight: 182,
-        definitionHeight: 88,
+        definitionHeight: 38,
+        leftPadding: 20,
       });
 
       pinkCard2 = new NymPostsix({
@@ -201,11 +204,12 @@ const createMug = async (name, type, definition, tags, product_description) => {
         formatNym: true,
         top: 460,
         definitionTop: 547,
-        left: 50,
+        left: 0,
         nymWidth: 920,
-        definitionWidth: 849,
+        definitionWidth: 800,
         nymHeight: 182,
-        definitionHeight: 88,
+        definitionHeight: 38,
+        leftPadding: 20,
       });
 
       blueCard2 = new NymPostsix({
@@ -221,11 +225,12 @@ const createMug = async (name, type, definition, tags, product_description) => {
         formatNym: true,
         top: 460,
         definitionTop: 547,
-        left: 50,
+        left: 0,
         nymWidth: 920,
-        definitionWidth: 849,
+        definitionWidth: 800,
         nymHeight: 182,
-        definitionHeight: 88,
+        definitionHeight: 38,
+        leftPadding: 20,
       });
 
       navyCard2 = new NymPostsix({
@@ -241,11 +246,12 @@ const createMug = async (name, type, definition, tags, product_description) => {
         formatNym: true,
         top: 460,
         definitionTop: 547,
-        left: 50,
+        left: 0,
         nymWidth: 920,
-        definitionWidth: 849,
+        definitionWidth: 800,
         nymHeight: 182,
-        definitionHeight: 88,
+        definitionHeight: 38,
+        leftPadding: 20,
       });
     }
 
@@ -253,71 +259,71 @@ const createMug = async (name, type, definition, tags, product_description) => {
       blackCard = new NymPostfive({
         width: 2475,
         height: 1155,
-        nymFontSize: "160px",
-        nymLineHeight: "155px",
+        nymFontSize: "160px", //160
+        nymLineHeight: "100px", //155, 140
         Nym: name,
         NymColor: "#000000",
         formatNym: false,
         top: 470,
         left: 76,
         nymWidth: 920,
-        nymHeight: 182,
+        nymHeight: 140, //182, 160
       });
 
       redCard = new NymPostfive({
         width: 2475,
         height: 1155,
         nymFontSize: "160px",
-        nymLineHeight: "155px",
+        nymLineHeight: "100px",
         Nym: name,
         NymColor: "#A92A1A",
         formatNym: false,
         top: 470,
         left: 76,
         nymWidth: 920,
-        nymHeight: 182,
+        nymHeight: 140,
       });
 
       blueCard = new NymPostfive({
         width: 2475,
         height: 1155,
         nymFontSize: "160px",
-        nymLineHeight: "155px",
+        nymLineHeight: "100px",
         Nym: name,
         NymColor: "#4182A1",
         formatNym: false,
         top: 470,
         left: 76,
         nymWidth: 920,
-        nymHeight: 182,
+        nymHeight: 140,
       });
 
       pinkCard = new NymPostfive({
         width: 2475,
         height: 1155,
         nymFontSize: "160px",
-        nymLineHeight: "155px",
+        nymLineHeight: "100px",
         Nym: name,
         NymColor: "#E0A19B",
         formatNym: false,
         top: 470,
         left: 76,
         nymWidth: 920,
-        nymHeight: 182,
+        nymHeight: 140,
       });
 
       navyCard = new NymPostfive({
         width: 2475,
         height: 1155,
         nymFontSize: "160px",
-        nymLineHeight: "155px",
+        nymLineHeight: "100px",
         Nym: name,
         NymColor: "#191838",
         formatNym: false,
         top: 470,
         left: 76,
         nymWidth: 920,
-        nymHeight: 182,
+        nymHeight: 140,
       });
 
       //15oz
@@ -326,70 +332,70 @@ const createMug = async (name, type, definition, tags, product_description) => {
         width: 2475,
         height: 1275,
         nymFontSize: "160px",
-        nymLineHeight: "155px",
+        nymLineHeight: "100px",
         Nym: name,
         NymColor: "#000000",
         formatNym: false,
         top: 558,
-        left: 84,
+        left: 1,
         nymWidth: 920,
-        nymHeight: 182,
+        nymHeight: 140,
       });
 
       redCard2 = new NymPostfive({
         width: 2475,
         height: 1275,
         nymFontSize: "160px",
-        nymLineHeight: "155px",
+        nymLineHeight: "100px",
         Nym: name,
         NymColor: "#A92A1A",
         formatNym: false,
         top: 558,
-        left: 84,
+        left: 1,
         nymWidth: 920,
-        nymHeight: 182,
+        nymHeight: 140,
       });
 
       blueCard2 = new NymPostfive({
         width: 2475,
         height: 1275,
         nymFontSize: "160px",
-        nymLineHeight: "155px",
+        nymLineHeight: "100px",
         Nym: name,
         NymColor: "#4182A1",
         formatNym: false,
         top: 558,
-        left: 84,
+        left: 1,
         nymWidth: 920,
-        nymHeight: 182,
+        nymHeight: 140,
       });
 
       pinkCard2 = new NymPostfive({
         width: 2475,
         height: 1275,
         nymFontSize: "160px",
-        nymLineHeight: "155px",
+        nymLineHeight: "100px",
         Nym: name,
         NymColor: "#E0A19B",
         formatNym: false,
         top: 558,
-        left: 84,
+        left: 1,
         nymWidth: 920,
-        nymHeight: 182,
+        nymHeight: 140,
       });
 
       navyCard2 = new NymPostfive({
         width: 2475,
         height: 1275,
         nymFontSize: "160px",
-        nymLineHeight: "155px",
+        nymLineHeight: "100px",
         Nym: name,
         NymColor: "#191838",
         formatNym: false,
         top: 558,
-        left: 84,
+        left: 1,
         nymWidth: 920,
-        nymHeight: 182,
+        nymHeight: 140,
       });
     }
 
@@ -398,70 +404,70 @@ const createMug = async (name, type, definition, tags, product_description) => {
         width: 2475,
         height: 1155,
         nymFontSize: "160px",
-        nymLineHeight: "155px",
+        nymLineHeight: "140px", //155
         Nym: name,
         NymColor: "#000000",
         formatNym: true,
         top: 470,
         left: 76,
         nymWidth: 920,
-        nymHeight: 182,
+        nymHeight: 140,
       });
 
       redCard = new NymPostfive({
         width: 2475,
         height: 1155,
         nymFontSize: "160px",
-        nymLineHeight: "155px",
+        nymLineHeight: "140px",
         Nym: name,
         NymColor: "#A92A1A",
         formatNym: true,
         top: 470,
         left: 76,
         nymWidth: 920,
-        nymHeight: 182,
+        nymHeight: 140,
       });
 
       pinkCard = new NymPostfive({
         width: 2475,
         height: 1155,
         nymFontSize: "160px",
-        nymLineHeight: "155px",
+        nymLineHeight: "140px",
         Nym: name,
         NymColor: "#E0A19B",
         formatNym: true,
         top: 470,
         left: 76,
         nymWidth: 920,
-        nymHeight: 182,
+        nymHeight: 140,
       });
 
       blueCard = new NymPostfive({
         width: 2475,
         height: 1155,
         nymFontSize: "160px",
-        nymLineHeight: "155px",
+        nymLineHeight: "140px",
         Nym: name,
         NymColor: "#4182A1",
         formatNym: true,
         top: 470,
         left: 76,
         nymWidth: 920,
-        nymHeight: 182,
+        nymHeight: 140,
       });
 
       navyCard = new NymPostfive({
         width: 2475,
         height: 1155,
         nymFontSize: "160px",
-        nymLineHeight: "155px",
+        nymLineHeight: "140px",
         Nym: name,
         NymColor: "#191838",
         formatNym: true,
         top: 470,
         left: 76,
         nymWidth: 920,
-        nymHeight: 182,
+        nymHeight: 140,
       });
 
       //15oz
@@ -470,70 +476,70 @@ const createMug = async (name, type, definition, tags, product_description) => {
         width: 2475,
         height: 1275,
         nymFontSize: "160px",
-        nymLineHeight: "155px",
+        nymLineHeight: "140px",
         Nym: name,
         NymColor: "#000000",
         formatNym: true,
         top: 546,
-        left: 40,
+        left: 1,
         nymWidth: 920,
-        nymHeight: 182,
+        nymHeight: 140,
       });
 
       redCard2 = new NymPostfive({
         width: 2475,
         height: 1275,
         nymFontSize: "160px",
-        nymLineHeight: "155px",
+        nymLineHeight: "140px",
         Nym: name,
         NymColor: "#A92A1A",
         formatNym: true,
         top: 546,
-        left: 40,
+        left: 1,
         nymWidth: 920,
-        nymHeight: 182,
+        nymHeight: 140,
       });
 
       pinkCard2 = new NymPostfive({
         width: 2475,
         height: 1275,
         nymFontSize: "160px",
-        nymLineHeight: "155px",
+        nymLineHeight: "140px",
         Nym: name,
         NymColor: "#E0A19B",
         formatNym: true,
         top: 546,
-        left: 40,
+        left: 1,
         nymWidth: 920,
-        nymHeight: 182,
+        nymHeight: 140,
       });
 
       blueCard2 = new NymPostfive({
         width: 2475,
         height: 1275,
         nymFontSize: "160px",
-        nymLineHeight: "155px",
+        nymLineHeight: "140px",
         Nym: name,
         NymColor: "#4182A1",
         formatNym: true,
         top: 546,
-        left: 40,
+        left: 1,
         nymWidth: 920,
-        nymHeight: 182,
+        nymHeight: 140,
       });
 
       navyCard2 = new NymPostfive({
         width: 2475,
         height: 1275,
         nymFontSize: "160px",
-        nymLineHeight: "155px",
+        nymLineHeight: "140px",
         Nym: name,
         NymColor: "#191838",
         formatNym: true,
         top: 546,
-        left: 40,
+        left: 1,
         nymWidth: 920,
-        nymHeight: 182,
+        nymHeight: 140,
       });
     }
     let blackImageId = null;
