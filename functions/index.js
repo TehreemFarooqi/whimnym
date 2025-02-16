@@ -5,8 +5,8 @@ const admin = require("firebase-admin");
 /*const fs = require("fs");
 const path = require("path");
 const { generateUniqueFileName } = require("./helper/helper.js");
-const { NymPostsix } = require("./services/nymPost_6.jsx");
-const { createMug } = require("./controllers/mug/mugController.js");
+const { NymPostseven } = require("./services/nymPost_7.jsx");
+/*const { createMug } = require("./controllers/mug/mugController.js");
 const { createHoodie } = require("./controllers/hoodie/hoodieController.js");
 const { createTShirt } = require("./controllers/tshirt/tshirtController.js");
 const { createCandle } = require("./controllers/candle/candlecontroller.js");*/
@@ -31,26 +31,27 @@ const RETRY_INTERVAL = 50000;
   console.log("Starting image creation...");
 
   try {
-    const black4oz = new NymPostsix({
-      width: 2475,
-      height: 1275, //1155
-      nymFontSize: "160px",
-      nymLineHeight: "17px",
-      definitionFontSize: "67px",
-      definitionLineHeight: "58px", //17
-      Nym: "Sample name",
-      Definition: "Sample definition",
+    const black4oz = new NymPostseven({
+      width: 1080,
+      height: 1080,
+      nymFontSize: "207px",
+      nymLineHeight: "181px",
+      definitionFontSize: "27px",
+      definitionLineHeight: "29px",
+      Nym: "Snackccident",
+      Definition:
+        "an unintentional consumption of an entire packet of chips in one sitting",
       NymColor: "#000000",
-      formatNym: true,
-      top: 460, //360
-      definitionTop: 547,
-      left: 50, //76
-      nymWidth: 920,
-      definitionWidth: 849,
-      nymHeight: 182,
-      definitionHeight: 88,
+      formatNym: false,
+      nymTop: 350,
+      definitionTop: 869,
+      nymWidth: 1080,
+      nymHeight: 333,
+      definitionWidth: 787,
+      definitionHeight: 65,
+      distanceBetweenTexts: 20,
+      backgroundImageUrl: "https://i.imgur.com/4pM1pgM.jpeg",
     });
-
     // Build the image
     const blackImage_1 = await black4oz.build({ format: "png" });
     const blackFileName_1 = generateUniqueFileName();
@@ -134,5 +135,4 @@ exports.api = functions.https.onRequest(async (req, res) => {
   app.listen(3000, () => {
     console.log("Server running on port 5000");
   });
-});
-*/
+});*/

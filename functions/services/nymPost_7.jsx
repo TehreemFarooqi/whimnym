@@ -91,7 +91,7 @@ class NymPostseven extends Builder {
     const context = canvas.getContext("2d");
 
     const splitTextIfNeeded = (text, maxWidth) => {
-      context.font = `${nymFontSize} BubbleGum`;
+      context.font = `${nymFontSize} Arial`;
       let words = text.split("");
       let currentLine = "";
       let lines = [];
