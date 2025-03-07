@@ -2,14 +2,14 @@ const express = require("express");
 const dotenv = require("dotenv");
 const functions = require("firebase-functions");
 const admin = require("firebase-admin");
-/*const fs = require("fs");
+const fs = require("fs");
 const path = require("path");
 const { generateUniqueFileName } = require("./helper/helper.js");
 const { NymPostseven } = require("./services/nymPost_7.jsx");
-/*const { createMug } = require("./controllers/mug/mugController.js");
+const { createMug } = require("./controllers/mug/mugController.js");
 const { createHoodie } = require("./controllers/hoodie/hoodieController.js");
 const { createTShirt } = require("./controllers/tshirt/tshirtController.js");
-const { createCandle } = require("./controllers/candle/candlecontroller.js");*/
+const { createCandle } = require("./controllers/candle/candlecontroller.js");
 dotenv.config();
 
 // Initialize Firebase Admin SDK
@@ -38,9 +38,9 @@ const RETRY_INTERVAL = 50000;
       nymLineHeight: "181px",
       definitionFontSize: "27px",
       definitionLineHeight: "29px",
-      Nym: "Snackccident",
+      Nym: "Snackrobatics",
       Definition:
-        "an unintentional consumption of an entire packet of chips in one sitting",
+        "The art of balancing multiple snacks in one hand and performing other tasks",
       NymColor: "#000000",
       formatNym: false,
       nymTop: 350,
@@ -52,6 +52,7 @@ const RETRY_INTERVAL = 50000;
       distanceBetweenTexts: 20,
       backgroundImageUrl: "https://i.imgur.com/4pM1pgM.jpeg",
     });
+
     // Build the image
     const blackImage_1 = await black4oz.build({ format: "png" });
     const blackFileName_1 = generateUniqueFileName();
@@ -112,6 +113,14 @@ async function initializeApp() {
   console.log("Initializing app...");
   //await createAndSaveImages();
   console.log("App initialized successfully.");
+  /*await createHoodie(
+    (name = "Snackrobaticssss"),
+    (type = "1"),
+    (definition =
+      "The art of balancing multiple snacks in one hand and performing other tasks"),
+    (tags = []),
+    (product_description = "Hello this is sample product")
+  );*/
 }
 
 // Routes
@@ -125,14 +134,14 @@ app.get("/", (req, res) => {
 });
 
 // Firebase Function that serves your Express app
-exports.api = functions.https.onRequest(async (req, res) => {
+/*exports.api = functions.https.onRequest(async (req, res) => {
   console.log("Handling request...");
   await initializeApp();
   app(req, res); // Handles the request
-});
+});*/
 
-/*initializeApp().then(() => {
+initializeApp().then(() => {
   app.listen(3000, () => {
     console.log("Server running on port 5000");
   });
-});*/
+});
